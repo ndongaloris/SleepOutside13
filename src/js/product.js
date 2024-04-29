@@ -8,6 +8,7 @@ function addProductToCart(product) {
   if (productList === undefined || productList === null) productList = [];
   productList.push(product);
   setLocalStorage("so-cart", productList);
+  setLocalStorage("so-cart2", productList);
 }
 // add to cart button event handler
 async function addToCartHandler(e) {
@@ -16,6 +17,4 @@ async function addToCartHandler(e) {
 }
 
 // add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+document.getElementById("addToCart").addEventListener("click", addToCartHandler);
