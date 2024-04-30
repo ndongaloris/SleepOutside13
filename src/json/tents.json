@@ -134,4 +134,6 @@
     "ListPrice": 69.99,
     "FinalPrice": 69.99
   }
+  
 ]
+"preview": "vite preview"
