@@ -36,3 +36,4 @@ export function getParams(param){
   const product = urlParams.get(param);
   return product;
 }
+
