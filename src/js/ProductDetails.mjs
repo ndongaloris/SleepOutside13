@@ -21,7 +21,6 @@ function renderTemplate(product){
     </section>`;
 }
 
-
 export default class ProductDetails{
     constructor(productId, dataSource){
         this.productId = productId;
@@ -49,12 +48,3 @@ export default class ProductDetails{
         element.insertAdjacentHTML("afterBegin", renderTemplate(this.product));
     }
 }
-
-
-// function addProductToCart(product) {
-//     
-//   }
-//   // add to cart button event handler
-//   async function addToCartHandler(e) {
-    
-//   }
