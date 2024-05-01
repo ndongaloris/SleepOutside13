@@ -42,7 +42,7 @@ export default class ProductDetails{
         this.productList = getLocalStorage("so-cart");
         if (this.productList === undefined || this.productList === null) this.productList = [];
         this.productList.push(this.product);
-        setLocalStorage("so-cart", this.product);
+        setLocalStorage("so-cart", this.productList);
     }
     renderProductDetails(selector){
         const element = document.querySelector(selector);
