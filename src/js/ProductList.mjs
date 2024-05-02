@@ -22,8 +22,8 @@ export default class productList{
     }
     async init(){
         const products = await this.dataSource.getData();
-        this.tentFilter(products);
-        this.renderList(this.tentFilter);
+        const newList = this.tentFilter(products);
+        this.renderList(newList);
     }
     renderList(list){
         // const htmlString =  productList.map(productCardTemplate);
@@ -31,7 +31,13 @@ export default class productList{
         renderListWithTemplate(productCardTemplate, this.listElement, list)
     }
     tentFilter(list){
-        const allProductId = ["880R", "985RF", "985PR","344YJ"];
-        return list.filter(product => allProductId.includes(product.id));
+        const allProductId = new Set(["880RR", "985RF", "985PR","344YJ"]);
+        const newList = [];
+        list.forEach(product => {
+            if(allProductId.has(product.Id)){
+                newList.push(product);
+            }
+        });
+        return newList;
     }
 }

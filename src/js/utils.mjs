@@ -1,11 +1,3 @@
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
-  const htmlString =  list.map(templateFn);
-  if (clear === true){
-    parentElement.innerHTML = "";
-  }
-  parentElement.insertAdjacentHTML(position, htmlString.join(""));
-}
-
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -37,3 +29,10 @@ export function getParams(param){
   return product;
 }
 
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
+  const htmlString =  list.map(templateFn);
+  if (clear === true){
+    parentElement.innerHTML = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlString.join(""));
+}
