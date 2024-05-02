@@ -1,9 +1,9 @@
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
   const htmlString =  list.map(templateFn);
-  parentElement.insertAdjacentHTML(position, htmlString.join(""));
   if (clear === true){
-    parentElement.removeChild();
+    parentElement.innerHTML = "";
   }
+  parentElement.insertAdjacentHTML(position, htmlString.join(""));
 }
 
 // wrapper for querySelector...returns matching element
