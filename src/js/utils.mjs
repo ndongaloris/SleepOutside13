@@ -29,7 +29,7 @@ export function getParams(param){
   return product;
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
+export function renderTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
   const htmlString =  list.map(templateFn);
   if (clear === true){
     parentElement.innerHTML = "";
