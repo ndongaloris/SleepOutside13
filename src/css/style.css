@@ -110,6 +110,14 @@ button {
   fill: gray;
 }
 
+.cart .superscript-number{
+  position: absolute;
+  top: 0;
+  left: 70%;
+  background: orange;
+  padding: 6px;
+  border-radius: 50%;
+}
 /* End cart icon styles */
 
 .mission {
