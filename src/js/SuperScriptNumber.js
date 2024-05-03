@@ -50,4 +50,3 @@ export function renderCartIconTemplate(){
     cartIcon.insertAdjacentHTML("afterbegin", cartIconTemplate());
 
 }
-superscriptNumber();
