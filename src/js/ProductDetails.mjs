@@ -1,4 +1,5 @@
 import { setLocalStorage, getLocalStorage} from "./utils.mjs";
+import { renderCartIconTemplate } from "./SuperScriptNumber";
 
 function renderTemplate(product){
     return `<section class="product-detail">
@@ -37,18 +38,14 @@ export default class ProductDetails{
         // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
         // add listener to Add to Cart button
         document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this));
+        document.getElementById("addToCart").addEventListener("click", () => {window.location.reload()});
     }
     addToCart(){
         this.productList = getLocalStorage("so-cart");
         if (this.productList === undefined || this.productList === null) this.productList = [];
         this.productList.push(this.product);
         setLocalStorage("so-cart", this.productList);
-<<<<<<< HEAD
-    }
-
-=======
     }    
->>>>>>> 8d69ba1dbd77d2decc2b1395351fa2425b7f84a1
     renderProductDetails(selector){
         const element = document.querySelector(selector);
         element.insertAdjacentHTML("afterbegin", renderTemplate(this.product)
