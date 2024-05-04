@@ -57,3 +57,5 @@ document.addEventListener('click', function(event) {
     removeFromCart(prodId);
   }
 });
+
+
