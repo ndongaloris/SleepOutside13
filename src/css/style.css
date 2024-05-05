@@ -118,6 +118,17 @@ button {
   padding: 6px;
   border-radius: 50%;
 }
+.cart-card{
+  position: relative;
+}
+.cart-card div{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3px;
+  font-size: 35px;
+  margin: 10px;
+}
 /* End cart icon styles */
 
 .mission {

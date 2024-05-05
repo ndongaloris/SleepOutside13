@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import {superscriptNumber } from "./SuperScriptNumber.js"
 
 function renderCartContents() {
@@ -23,9 +23,35 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <div class="cart-card__del-btn">
+    <a href="#" id="removeFromCart" data-id="${item.Id}">&#9746;</a>
+  </div>
 </li>`;
 
-  return newItem;
+return newItem;
 }
-
 renderCartContents();
+
+// Add event listener to all "Remove" buttons dynamically
+
+document.querySelectorAll("#removeFromCart").forEach(element => {
+  element.addEventListener("click", function(event) {
+    if (event.target.id === "removeFromCart") {
+      const prodId = event.target.dataset.id;
+      removeFromCart(prodId);
+    }
+  });
+});
+
+function removeFromCart(prodId) {
+  let cartItems = getLocalStorage("so-cart");
+  const index = cartItems.findIndex(item => item.Id === prodId);
+  
+  if (index !== -1){
+    cartItems.splice(index, 1);
+  }
+  // Update local storage with the new cart items
+  setLocalStorage("so-cart",cartItems)
+  // Re-render the cart contents to reflect the changes
+  window.location.reload();
+}
