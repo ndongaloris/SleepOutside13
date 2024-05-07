@@ -1,5 +1,4 @@
 import { setLocalStorage, getLocalStorage} from "./utils.mjs";
-import { renderCartIconTemplate } from "./SuperScriptNumber";
 
 function renderTemplate(product){
     return `<section class="product-detail">

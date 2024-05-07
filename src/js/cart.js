@@ -1,12 +1,13 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
-import {superscriptNumber } from "./SuperScriptNumber.js"
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter(); 
 
 function renderCartContents() {
   let cartItems = getLocalStorage("so-cart");
   if (cartItems === undefined || cartItems === null) cartItems = [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
-  superscriptNumber();
 }
 
 function cartItemTemplate(item) {
