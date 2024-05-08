@@ -30,9 +30,9 @@ export default class shoppingCart{
     renderCartContents() {
         let cartItems = getLocalStorage(this.key);
         if (cartItems === undefined || cartItems === null) cartItems = [];
-        const htmlItems = this.value.map((item) => cartItemTemplate(item));
+        const htmlItems = cartItems.map((item) => cartItemTemplate(item));
         document.querySelector(this.productList).innerHTML = htmlItems.join("");
-        removeItems();
+        removeItems(this.key);
     }
 }
 
