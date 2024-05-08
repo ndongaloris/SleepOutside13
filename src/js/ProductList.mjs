@@ -26,8 +26,6 @@ export default class productList{
         this.renderList(newList);
     }
     renderList(list){
-        // const htmlString =  productList.map(productCardTemplate);
-        // this.listElement.insertAdjacentHTML("afterbegin", htmlString.join(""));
         renderTemplate(productCardTemplate, this.listElement, list)
     }
     tentFilter(list){
