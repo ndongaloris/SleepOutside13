@@ -1,4 +1,4 @@
-import { renderTemplate } from "./utils.mjs";
+import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product){
     return `<li class="product-card">
@@ -26,9 +26,7 @@ export default class productList{
         this.renderList(newList);
     }
     renderList(list){
-        // const htmlString =  productList.map(productCardTemplate);
-        // this.listElement.insertAdjacentHTML("afterbegin", htmlString.join(""));
-        renderTemplate(productCardTemplate, this.listElement, list)
+        renderListWithTemplate(productCardTemplate, this.listElement, list)
     }
     tentFilter(list){
         const allProductId = new Set(["880RR", "985RF", "985PR","344YJ"]);
