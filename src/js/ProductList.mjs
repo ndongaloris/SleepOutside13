@@ -6,7 +6,6 @@ function productCardTemplate(product){
                 <img
                     src=${product.Images.PrimarySmall}
                     alt=${product.Name}
-                />
                 <h3 class="card__brand">${product.Brand.Name}</h3>
                 <h2 class="card__name">${product.Name}</h2>
                 <p class="product-card__price">${product.FinalPrice}</p></a
@@ -21,6 +20,7 @@ export default class productList{
         this.listElement = listElement;
     }
     async init(){
+        
         const list = await this.dataSource.getData(this.category);
         this.renderList(list);
     }

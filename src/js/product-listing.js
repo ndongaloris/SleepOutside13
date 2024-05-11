@@ -4,6 +4,7 @@ import ProductData from "../js/ProductData.mjs"
 
 
 const category = getParams("category");
+document.querySelector(".productHeader").textContent += `: ${category.charAt(0).toUpperCase()}${category.substring(1)}`;
 // first create an instance of our ProductData class.
 const dataSource = new ProductData();
 // then get the element we want the product list to render in
