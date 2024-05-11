@@ -1,43 +1,61 @@
-import { renderTemplate } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-function CardTemplate(product){
-    return `<li class="product-card">
-                <a href="product_pages/?product=${product.Id}">
-                <img
-                    src=${product.Image}
-                    alt=${product.Name}
-                />
-                <h3 class="card__brand">${product.Brand.Name}</h3>
-                <h2 class="card__name">${product.Name}</h2>
-                <p class="product-card__price">${product.FinalPrice}</p></a
-                >
-            </li>`
+function cartItemTemplate(item) {
+    const newItem = `<li class="cart-card divider">
+    <a href="#" class="cart-card__image">
+        <img
+            src="${item.Image}"
+            alt="${item.Name}"
+        />
+        </a>
+        <a href="#">
+        <h2 class="card__name">${item.Name}</h2>
+        </a>
+        <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+        <p class="cart-card__quantity">qty: 1</p>
+        <p class="cart-card__price">$${item.FinalPrice}</p>
+        <div class="cart-card__del-btn">
+        <a href="#" id="removeFromCart" data-id="${item.Id}">&#9746;</a>
+        </div>
+    </li>`;
+    
+    return newItem;
 }
 
 export default class shoppingCart{
-    constructor(category, dataSource, listElement){
-        this.dataSource = dataSource;
-        this.category = category;
-        this.listElement = listElement;
+    constructor(key, productList){
+        this.key = key;
+        this.productList = productList;
     }
-    async init(){
-        const products = await this.dataSource.getData();
-        const newList = this.tentFilter(products);
-        this.renderList(newList);
+    renderCartContents() {
+        let cartItems = getLocalStorage(this.key);
+        if (cartItems === undefined || cartItems === null) cartItems = [];
+        const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+        document.querySelector(this.productList).innerHTML = htmlItems.join("");
+        removeItems(this.key);
     }
-    renderList(list){
-        // const htmlString =  productList.map(productCardTemplate);
-        // this.listElement.insertAdjacentHTML("afterbegin", htmlString.join(""));
-        renderTemplate(CardTemplate, this.listElement, list)
+}
+
+// Add event listener to all "Remove" buttons dynamically
+function removeItems(key){
+    document.querySelectorAll("#removeFromCart").forEach(element => {
+    element.addEventListener("click", function(event) {
+        if (event.target.id === "removeFromCart") {
+        const prodId = event.target.dataset.id;
+        removeFromCart(key, prodId);
+        }
+    });
+    });
+}
+function removeFromCart(key, prodId) {
+    let cartItems = getLocalStorage(key);
+    const index = cartItems.findIndex(item => item.Id === prodId);
+
+    if (index !== -1){
+        cartItems.splice(index, 1);
     }
-    tentFilter(list){
-        const allProductId = new Set(["880RR", "985RF", "985PR","344YJ"]);
-        const newList = [];
-        list.forEach(product => {
-            if(allProductId.has(product.Id)){
-                newList.push(product);
-            }
-        });
-        return newList;
-    }
+    // Update local storage with the new cart items
+    setLocalStorage(key,cartItems)
+    // Re-render the cart contents to reflect the changes
+    window.location.reload();
 }
