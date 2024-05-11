@@ -7,7 +7,7 @@ function renderTemplate(product){
     
     <img
         class="divider"
-        src=${product.Image}
+        src=${product.Images.PrimaryMedium}
         alt=${product.Name}
     />
 
@@ -29,6 +29,7 @@ export default class ProductDetails{
         this.dataSource = dataSource;
     }
     async init(){
+        // const list = await this.dataSource.getData(this.productId);
         // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
         this.product = await this.dataSource.findProductById(this.productId);
         // once we have the product details we can render out the HTML

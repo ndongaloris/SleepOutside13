@@ -2,9 +2,9 @@ import { renderTemplate } from "./utils.mjs";
 
 function productCardTemplate(product){
     return `<li class="product-card">
-                <a href="product_pages/?product=${product.Id}">
+                <a href="../product_pages/index.html?product=${product.Id}">
                 <img
-                    src=${product.Image}
+                    src=${product.Images.PrimarySmall}
                     alt=${product.Name}
                 />
                 <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -21,23 +21,10 @@ export default class productList{
         this.listElement = listElement;
     }
     async init(){
-        const products = await this.dataSource.getData();
-        const newList = this.tentFilter(products);
-        this.renderList(newList);
+        const list = await this.dataSource.getData(this.category);
+        this.renderList(list);
     }
     renderList(list){
-        // const htmlString =  productList.map(productCardTemplate);
-        // this.listElement.insertAdjacentHTML("afterbegin", htmlString.join(""));
         renderTemplate(productCardTemplate, this.listElement, list)
-    }
-    tentFilter(list){
-        const allProductId = new Set(["880RR", "985RF", "985PR","344YJ"]);
-        const newList = [];
-        list.forEach(product => {
-            if(allProductId.has(product.Id)){
-                newList.push(product);
-            }
-        });
-        return newList;
     }
 }
