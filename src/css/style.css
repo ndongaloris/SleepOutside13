@@ -244,3 +244,11 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.discount {
+  background-color: yellow;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+  float: right;
+}
