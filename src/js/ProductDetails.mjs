@@ -4,12 +4,12 @@ function renderTemplate(product){
     return `<section class="product-detail">
     <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
-    
-    <img
-        class="divider"
+    <picture>
+        <source srcset="${product.Images.PrimarySmall}" media="(max-width: 700px)">
+        <img
         src=${product.Images.PrimaryMedium}
-        alt=${product.Name}
-    />
+        alt=${product.Name}>
+    </picture>
 
     <p class="product-card__price">${product.FinalPrice}</p>
     <p class="product__color">${product.Colors[0].ColorName}</p>
