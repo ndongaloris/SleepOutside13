@@ -61,4 +61,3 @@ export async function loadHeaderFooter(){
   renderWithTemplate(footer, footerElement);
   superscriptNumber();
 }
-

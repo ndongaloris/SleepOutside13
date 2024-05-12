@@ -42,7 +42,22 @@ export default class ProductDetails{
     addToCart(){
         this.productList = getLocalStorage("so-cart");
         if (this.productList === undefined || this.productList === null) this.productList = [];
-        this.productList.push(this.product);
+
+        const findProduct = this.productList.filter((item) => item.Id === this.productId)
+        if(findProduct.length !== 0) {
+            findProduct[0].qty++
+
+            // remove the product that you edited from the old product list
+            this.productList = this.productList.filter((item) => item.Id !== this.productId)
+
+            // now added the product with the new updated quantity back to the product list
+            this.productList.push(findProduct[0]);
+
+        } else {
+            this.product.qty = 1
+            this.productList.push(this.product);
+        }
+
         setLocalStorage("so-cart", this.productList);
     }    
     renderProductDetails(selector){
