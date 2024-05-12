@@ -94,6 +94,9 @@ button {
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
+.product-list img{
+  width: 100PX;
+}
 /* End utility classes */
 
 /* Cart icon styles */
