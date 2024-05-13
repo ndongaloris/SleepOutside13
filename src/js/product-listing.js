@@ -2,6 +2,7 @@ import { loadHeaderFooter, getParams } from "./utils.mjs";
 import productList from "./ProductList.mjs"
 import ProductData from "../js/ProductData.mjs"
 
+loadHeaderFooter();
 
 const category = getParams("category");
 document.querySelector(".productHeader").textContent += `: ${category.charAt(0).toUpperCase()}${category.substring(1)}`;

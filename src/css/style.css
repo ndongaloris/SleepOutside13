@@ -252,3 +252,31 @@ footer {
   border-radius: 5px;
   float: right;
 }
+
+/* ----------- Checkout ----------- */
+
+#checkout table{
+  border: 1px solid var(--primary-color);
+}
+#checkout fieldset{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  border: 1px solid var(--primary-color);
+  padding: 15px;
+}
+#checkout fieldset input{
+  height: 35px;
+  margin-left: 10px;
+  border:none;
+  border-bottom: 1px solid var(--primary-color);
+}
+#checkout fieldset label{
+  margin: 10px;
+}
+#checkout table th{
+  text-align: left;
+}
+#checkout th, #checkout td{
+  padding: 15px;
+}

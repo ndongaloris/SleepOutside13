@@ -8,31 +8,67 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <script src="../js/checkout.js" type="module" defer></script>
   </head>
 
   <body>
-    <header class="divider">
-      <div class="logo">
-        <img src="images/noun_Tent_2517.svg" alt="tent image for logo" />
-
-        <a href="index.html">
-          Sleep
-          <span class="highlight">Outside</span>
-        </a>
-      </div>
-
-      <div class="cart">
-        
-      </div>
-    </header>
+    <header class="divider" id="main-header"></header>
 
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <form action="" id="checkout">
+          <fieldset> 
+            <legend>Your Name</legend>
+            <label>First Name: <input type="text" required></label>
+            <label>Last Name: <input type="text" required></label>
+          </fieldset>
+          
+          <fieldset>
+            <legend>Address</legend>
+            <label>Street Address: <input type="text" required></label>
+            <label>City: <input type="text" required></label>
+            <label>State: <input type="text" required></label>
+            <label>Zip Code: <input type="number" required></label>
+            <label>Credit Card Number: <input type="number" required></label>
+          </fieldset>
+          
+          <fieldset>
+            <legend>Payment</legend>
+            <label>Expiration date: <input type="datetime-local" required></label>
+            <label>Security Code: <input type="number" required></label>
+          </fieldset>
+          <section>
+            <table>
+              <tr>
+                <th>Your Order</th>
+                <th></th>
+              </tr>
+              <tr>
+                <td>X Items</td>
+                <td>25000</td>
+              </tr>
+              <tr>
+                <td>Delivery</td>
+                <td>3200</td>
+              </tr>
+              <tr>
+                <td>Vat (Incl.)</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <th>Total</th>
+                <th>28300</th>
+              </tr>
+            </table>
+          </section>
+          <button>CHECKOUT</button>
+        </form>
       </section>
     </main>
 
-    <footer>&copy;NOT a real business</footer>
+    <footer id="main-footer"></footer>
   </body>
 </html>
