@@ -1,5 +1,7 @@
-import { setLocalStorage, getLocalStorage} from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+import {getLocalStorage} from "./utils.mjs";
 
+const services = new ExternalServices();
 
 function paymentTemplate(){
     return `<table>
@@ -42,7 +44,6 @@ export default class checkoutProcess{
         this.renderPaymentTemplate();
         this.calculateItemSummary();
     }
-        
     calculateItemSummary() {
         // calculate and display the total amount of the items in the cart, and the number of items.
         this.list.forEach(item => {
@@ -74,4 +75,48 @@ export default class checkoutProcess{
         document.querySelector(this.selector)
         .insertAdjacentHTML("afterbegin", paymentTemplate());
     }
+    async checkout(form) {
+        // build the data object from the calculated fields, the items in the cart, and the information entered into the form
+        // const formElement = document.forms["checkout"];
+
+        const json = formatDataToJSON(form);
+        // add totals, and item details
+        json.orderDate = new Date();
+        json.orderTotal = this.orderTotal;
+        json.tax = this.tax;
+        json.shipping = this.shipping;
+        json.items = packageItems(this.list);
+        console.log(json);
+
+        // call the checkout method in our ExternalServices module and send it our data object.
+        try {
+            const res = await services.checkout(json);
+            console.log(res);
+        } catch (err) {
+            console.log(err);
+            }
+        }
+}
+
+// takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
+function packageItems(items) {
+    // convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
+    const packageOfItems = items.map((item) => {
+        console.log(item);
+        return { id: item.Id,
+            price: item.FinalPrice,
+            name: item.Name,
+            quantity: 1,
+        }
+    });
+    return packageOfItems.map(items);
+}
+function formatDataToJSON(element){
+    const formatData = new FormData(element),
+    convertedJSON = {};
+
+    formatData.forEach(function(value, key){
+        convertedJSON[key] = value;
+    })
+    return convertedJSON;
 }
