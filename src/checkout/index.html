@@ -19,7 +19,7 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
-        <form action="" id="checkout">
+        <form name="checkout" id="checkout">
           <fieldset> 
             <legend>Your Name</legend>
             <label>First Name: <input type="text" required></label>
@@ -31,18 +31,18 @@
             <label>Street Address: <input type="text" required></label>
             <label>City: <input type="text" required></label>
             <label>State: <input type="text" required></label>
-            <label>Zip Code: <input type="number" required></label>
-            <label>Credit Card Number: <input type="number" required></label>
+            <label>Zip Code: <input type="number" id="zip"></label>
           </fieldset>
           
           <fieldset>
+            <label>Credit Card Number: <input type="number" required></label>
             <legend>Payment</legend>
-            <label>Expiration date: <input type="datetime-local" required></label>
+            <label>Expiration date: <input type="date" required></label>
             <label>Security Code: <input type="number" required></label>
           </fieldset>
           <section id="payment">          
           </section>
-          <button>CHECKOUT</button>
+          <button id="checkoutButton">CHECKOUT</button>
         </form>
       </section>
     </main>

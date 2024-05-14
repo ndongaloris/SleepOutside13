@@ -85,6 +85,7 @@ export default class checkoutProcess{
         json.orderTotal = this.orderTotal;
         json.tax = this.tax;
         json.shipping = this.shipping;
+        json.subTotal = this.subTotal;
         json.items = packageItems(this.list);
         console.log(json);
 
@@ -106,10 +107,10 @@ function packageItems(items) {
         return { id: item.Id,
             price: item.FinalPrice,
             name: item.Name,
-            quantity: 1,
+            quantity: item.qty,
         }
     });
-    return packageOfItems.map(items);
+    return packageOfItems;
 }
 function formatDataToJSON(element){
     const formatData = new FormData(element),
