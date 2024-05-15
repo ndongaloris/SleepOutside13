@@ -21,9 +21,9 @@ function cartItemTemplate(item) {
         <a href="#" id="removeFromCart" data-id="${item.Id}">&#9746;</a>
         </div>
         <div class="itemQuantity">
-            <p class="minus">-</p>
-            <input class="num" type="number" value=${item.qty} max="10"> 
-            <p class="plus">+</p>
+            <p id="minus">-</p>
+            <input class="num" type="number" value=${item.qty} min=1 max="10"> 
+            <p id="plus">+</p>
         </div>
     </li>`;
     
@@ -71,9 +71,32 @@ function removeFromCart(key, prodId) {
 }
 
 function cartItemQuantity(){
-    let plusButton = document.querySelector(".plus");
-    plusButton.addEventListener("click", () =>{
-        plusButton += 1;
-        document.querySelector(".plus").value = plusButton;
+    document.querySelectorAll("#minus").forEach(element => {        
+        element.addEventListener("click", (event) =>{
+            // Navigate to the parent element of the clicked minus button
+            let parentElement = event.target.parentElement;
+            // Find the input element within the same parent element
+            let qtyInput = parentElement.querySelector(".num");
+            if (qtyInput) {
+                // Decrement the value
+                let qtyValue = parseInt(qtyInput.value);
+                qtyValue--; 
+                qtyInput.value = qtyValue;
+            }
+        })
+    })
+    document.querySelectorAll("#plus").forEach(element => {        
+        element.addEventListener("click", (event) =>{
+            // Navigate to the parent element of the clicked minus button
+            let parentElement = event.target.parentElement;
+            // Find the input element within the same parent element
+            let qtyInput = parentElement.querySelector(".num");
+            if (qtyInput) {
+                // Decrement the value
+                let qtyValue = parseInt(qtyInput.value);
+                qtyValue++; 
+                qtyInput.value = qtyValue;
+            }
+        })
     })
 }

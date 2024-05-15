@@ -235,14 +235,14 @@ button {
   width: fit-content;
   margin: auto; 
 }
-.itemQuantity .minus, .itemQuantity .plus{
+.itemQuantity #minus, .itemQuantity #plus{
   background-color: var(--secondary-color);
   font-size: var(--large-font);
   padding: 7px;
   margin: 0;
   color: white;
 }
-.itemQuantity .minus, .itemQuantity .plus:hover{
+.itemQuantity #minus, .itemQuantity #plus:hover{
   cursor: pointer;
 }
 .itemQuantity .num{
