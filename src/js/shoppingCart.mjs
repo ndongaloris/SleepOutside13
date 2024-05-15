@@ -42,7 +42,6 @@ export default class shoppingCart{
         document.querySelector(this.productList).innerHTML = htmlItems.join("");
         removeItems(this.key);
         cartItemQuantity();
-
     }
 }
 
