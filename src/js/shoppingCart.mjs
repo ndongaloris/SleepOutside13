@@ -20,7 +20,11 @@ function cartItemTemplate(item) {
         <div class="cart-card__del-btn">
         <a href="#" id="removeFromCart" data-id="${item.Id}">&#9746;</a>
         </div>
-        <p class="cart-card__quantity">qty: ${item.qty}</p>
+        <div class="itemQuantity">
+            <p class="minus">-</p>
+            <input class="num" type="number" value=${item.qty} max="10"> 
+            <p class="plus">+</p>
+        </div>
     </li>`;
     
     return newItem;
@@ -37,6 +41,8 @@ export default class shoppingCart{
         const htmlItems = cartItems.map((item) => cartItemTemplate(item));
         document.querySelector(this.productList).innerHTML = htmlItems.join("");
         removeItems(this.key);
+        cartItemQuantity();
+
     }
 }
 
@@ -62,4 +68,12 @@ function removeFromCart(key, prodId) {
     setLocalStorage(key,cartItems)
     // Re-render the cart contents to reflect the changes
     window.location.reload();
+}
+
+function cartItemQuantity(){
+    let plusButton = document.querySelector(".plus");
+    plusButton.addEventListener("click", () =>{
+        plusButton += 1;
+        document.querySelector(".plus").value = plusButton;
+    })
 }
