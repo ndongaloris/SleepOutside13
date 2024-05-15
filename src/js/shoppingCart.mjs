@@ -23,6 +23,31 @@ function cartItemTemplate(item) {
     
     return newItem;
 }
+function checkoutSummary(){
+    return `<table>
+        <tr>
+        <th>Your Order</th>
+        <th></th>
+        </tr>
+        <tr>
+        <td>X Items</td>
+        <td></td>
+        </tr>
+        <tr>
+        <td>Delivery</td>
+        <td></td>
+        </tr>
+        <tr>
+        <td>Vat (Incl.)</td>
+        <td></td>
+        </tr>
+        <tr>
+        <th>Total</th>
+        <th></th>
+        </tr>
+    </table>
+    <a href="../checkout/index.html">PROCEED TO CHECKOUT</a>`
+}
 
 export default class shoppingCart{
     constructor(key, productList){
@@ -35,6 +60,9 @@ export default class shoppingCart{
         const htmlItems = cartItems.map((item) => cartItemTemplate(item));
         document.querySelector(this.productList).innerHTML = htmlItems.join("");
         removeItems(this.key);
+        if (this.cartItems){
+            document.querySelector("#product-summary").insertAdjacentHTML("afterbegin", checkoutSummary());
+        }
     }
 }
 
