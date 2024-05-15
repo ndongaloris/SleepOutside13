@@ -25,28 +25,28 @@ function cartItemTemplate(item) {
 }
 function checkoutSummary(){
     return `<table>
-        <tr>
-        <th>Your Order</th>
-        <th></th>
-        </tr>
-        <tr>
-        <td>X Items</td>
-        <td></td>
-        </tr>
-        <tr>
-        <td>Delivery</td>
-        <td></td>
-        </tr>
-        <tr>
-        <td>Vat (Incl.)</td>
-        <td></td>
-        </tr>
-        <tr>
-        <th>Total</th>
-        <th></th>
-        </tr>
-    </table>
-    <a href="../checkout/index.html">PROCEED TO CHECKOUT</a>`
+                <tr>
+                    <th>Your Order</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td id="itemTotal"></td>
+                    <td id="subTotal"></td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td id="shipping"></td>
+                </tr>
+                <tr>
+                    <td>Vat (Incl.)</td>
+                    <td id="tax"></td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <th id="orderTotal"></th>
+                </tr>
+            </table>
+        <a href="../checkout/index.html">PROCEED TO CHECKOUT</a>`
 }
 
 export default class shoppingCart{
@@ -60,7 +60,7 @@ export default class shoppingCart{
         const htmlItems = cartItems.map((item) => cartItemTemplate(item));
         document.querySelector(this.productList).innerHTML = htmlItems.join("");
         removeItems(this.key);
-        if (this.cartItems){
+        if (cartItems.length > 0){
             document.querySelector("#product-summary").insertAdjacentHTML("afterbegin", checkoutSummary());
         }
     }

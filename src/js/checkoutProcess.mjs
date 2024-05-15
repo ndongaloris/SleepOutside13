@@ -28,6 +28,30 @@ function paymentTemplate(){
             </table>`;
 }
 
+function formatDataToJSON(element){
+    const formatData = new FormData(element),
+    convertedJSON = {};
+
+    formatData.forEach(function(value, key){
+        convertedJSON[key] = value;
+    })
+    return convertedJSON;
+}
+
+// takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
+function packageItems(items) {
+    // convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
+    const packageOfItems = items.map((item) => {
+        console.log(item);
+        return { id: item.Id,
+            price: item.FinalPrice,
+            name: item.Name,
+            quantity: item.qty,
+        }
+    });
+    return packageOfItems;
+}
+
 export default class checkoutProcess{
     constructor(key, selector){
         this.key = key;
@@ -48,16 +72,16 @@ export default class checkoutProcess{
         // calculate and display the total amount of the items in the cart, and the number of items.
         this.list.forEach(item => {
             this.itemTotal += item.qty;
-            this.subTotal += item.FinalPrice * item.qty;
+            this.subTotal += Math.round(item.FinalPrice * item.qty, 2);
         });
         this.calculateOrdertotal();
     }
 
     calculateOrdertotal() {
         // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
-        this.shipping = (this.itemTotal - 1) * 2 + 10;
-        this.tax = this.subTotal * 0.06;
-        this.orderTotal = this.tax + this.subTotal + this.shipping;
+        this.shipping = Math.round((this.itemTotal - 1) * 2 + 10, 2);
+        this.tax = Math.round(this.subTotal * 0.06, 2);
+        this.orderTotal = Math.round(this.tax + this.subTotal + this.shipping, 2);
 
         // display the totals.
         this.displayOrderTotals();
@@ -66,10 +90,10 @@ export default class checkoutProcess{
     displayOrderTotals() {
         // once the totals are all calculated display them in the order summary page
         document.querySelector("#itemTotal").textContent = `(${this.itemTotal}) Items`;
-        document.querySelector("#subTotal").textContent = Math.round(this.subTotal);
-        document.querySelector("#tax").textContent = Math.round(this.tax);
+        document.querySelector("#subTotal").textContent = this.subTotal;
+        document.querySelector("#tax").textContent = this.tax;
         document.querySelector("#shipping").textContent = this.shipping;
-        document.querySelector("#orderTotal").textContent = Math.round(this.orderTotal,2);
+        document.querySelector("#orderTotal").textContent = this.orderTotal;
     }
     renderPaymentTemplate(){
         document.querySelector(this.selector)
@@ -94,32 +118,10 @@ export default class checkoutProcess{
             const res = await services.checkout(json);
             console.log(res);
             setLocalStorage("so-cart", []);
-            location.assign("../checkout/success.html");
+            location.assign("/checkout/success.html");
         } catch (err) {
             console.log(err);
         }
     }
 }
 
-// takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
-function packageItems(items) {
-    // convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
-    const packageOfItems = items.map((item) => {
-        console.log(item);
-        return { id: item.Id,
-            price: item.FinalPrice,
-            name: item.Name,
-            quantity: item.qty,
-        }
-    });
-    return packageOfItems;
-}
-function formatDataToJSON(element){
-    const formatData = new FormData(element),
-    convertedJSON = {};
-
-    formatData.forEach(function(value, key){
-        convertedJSON[key] = value;
-    })
-    return convertedJSON;
-}

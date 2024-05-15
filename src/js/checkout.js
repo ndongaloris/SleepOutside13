@@ -10,13 +10,13 @@ checkingOut.init();
 document
     .querySelector("#zip")
     .addEventListener("blur", checkingOut.calculateOrdertotal.bind(checkingOut));
-    // listening for click on the button
-    document.querySelector("#checkoutButton").addEventListener("click", (e) => {
+// listening for click on the button
+document.querySelector("#checkoutButton").addEventListener("click", (e) => {
     e.preventDefault();
 
-    const myForm = document.forms[0];
+    const myForm = document.forms["checkout"];
     const chk_status = myForm.checkValidity();
     myForm.reportValidity();
     if(chk_status)
-        checkingOut.checkout(document.forms["checkout"]);
+        checkingOut.checkout(myForm);
 });
