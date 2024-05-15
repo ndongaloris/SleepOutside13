@@ -13,12 +13,14 @@ function cartItemTemplate(item) {
         <a href="#">
         <h2 class="card__name">${item.Name}</h2>
         </a>
-        <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-        <p class="cart-card__quantity">qty: ${item.qty}</p>
-        <p class="cart-card__price">$${item.FinalPrice}</p>
+        <div id="color-price">
+            <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+            <p class="cart-card__price">$${item.FinalPrice}</p>
+        </div>
         <div class="cart-card__del-btn">
         <a href="#" id="removeFromCart" data-id="${item.Id}">&#9746;</a>
         </div>
+        <p class="cart-card__quantity">qty: ${item.qty}</p>
     </li>`;
     
     return newItem;
