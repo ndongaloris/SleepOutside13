@@ -224,9 +224,44 @@ button {
   grid-column: 3;
 }
 
+/* ------------- Newsletter ------------- */
+
+#Newsletter{
+  background-color: var(--light-grey);
+  font-family: var(--font-body);
+  font-size: var(--large-font);
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+#Newsletter input{
+  width: 100%;
+  height: 50px;
+  border: 3px solid var(--secondary-color);
+  margin: 0;
+  font-size:medium;
+}
+
+#Newsletter button{
+  width: 95%;
+  height: 50px;
+  margin: 0;
+  padding: 5px;
+}
+#Newsletter p{
+  margin: 0;
+}
+#inputNews p{
+  font-size: 100px;
+  border-radius: 50%;
+  text-align: center;
+  border: 20px dotted;
+  margin: auto;
+  padding: 20px;
+}
 
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 750px) {
   body {
     max-width: 1080px;
     margin: auto;
@@ -237,6 +272,21 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+  #Newsletter{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+  }
+  #Newsletter #inputNews{
+    display: flex;
+    align-items:flex-end;
+  }
+  #Newsletter #inputNews label, #inputNews  button{
+    width: 50%;
+    margin: 0;
+  }
+  #Newsletter label{
+    padding-left: 15px;
   }
 }
 
