@@ -224,7 +224,10 @@ button {
   grid-column: 3;
 }
 
-
+fieldset {
+  display:flex;
+  flex-direction: column;
+}
 
 @media screen and (min-width: 500px) {
   body {

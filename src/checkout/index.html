@@ -8,13 +8,13 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
 
   <body>
     <header class="divider">
       <div class="logo">
-        <img src="images/noun_Tent_2517.svg" alt="tent image for logo" />
+        <img src="../images/noun_Tent_2517.svg" alt="tent image for logo" />
 
         <a href="index.html">
           Sleep
@@ -30,6 +30,30 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <form action="">
+          <fieldset>
+            <legend>Customer Name</legend>
+            <label for="">First Name<input type="text" required></label>
+            <label for="">Last Name<input type="text" required></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Address</legend>
+            <label for="">Street Address<input type="text" required></label>
+            <label for="">City<input type="text" required></label>
+            <label for="">State<input type="text" required></label>
+            <label for="">Zip Code<input type="text" required></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment</legend>
+            <label for="">Credit Card Number<input type="text" required></label>
+            <label for="">Expiration Date<input type="text" required></label>
+            <label for="">Security Code<input type="text" required></label>
+          </fieldset>
+
+          <button>Checkout</button>
+        </form>
       </section>
     </main>
 
