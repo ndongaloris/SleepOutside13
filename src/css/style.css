@@ -124,13 +124,10 @@ button {
 .cart-card{
   position: relative;
 }
-.cart-card div{
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 3px;
+.cart-card .cart-card__del-btn{
   font-size: 35px;
-  margin: 10px;
+  width: fit-content;
+  margin: auto;
 }
 /* End cart icon styles */
 
@@ -209,21 +206,59 @@ button {
   grid-column: 2;
 }
 
-.cart-card__color {
-  grid-row: 2;
-  grid-column: 2;
-}
-
 .cart-card__quantity {
-  grid-row: 1;
-  grid-column: 3;
-}
-
-.cart-card__price {
   grid-row: 2;
   grid-column: 3;
 }
 
+#color-price{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  grid-row: 2/3;
+  grid-column: 2/3; 
+  margin:0;
+}
+#color-price p{ 
+  margin:0;
+}
+#color-price p{
+  font-size: 20px;
+
+}
+.itemQuantity{
+  grid-row: 2;
+  grid-column: 3/4;
+  display: flex;
+  align-items: center; 
+  padding: 0 10px 10px 10px;
+  width: fit-content;
+  margin: auto; 
+}
+.itemQuantity #minus, .itemQuantity #plus{
+  background-color: var(--secondary-color);
+  font-size: var(--large-font);
+  padding: 7px;
+  margin: 0;
+  color: white;
+}
+.itemQuantity #minus, .itemQuantity #plus:hover{
+  cursor: pointer;
+}
+.itemQuantity .num{
+  font-size: var(--large-font);
+  padding: 7px;
+  width: 40px;
+  border: 2px solid var(--secondary-color);
+}
+ /* Hide the spinner controls */
+.num::-webkit-inner-spin-button,
+.num::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+.num {
+    -moz-appearance: textfield; /* Firefox */
+}
 /* ------------- Newsletter ------------- */
 
 #Newsletter{

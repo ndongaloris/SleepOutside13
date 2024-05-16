@@ -48,7 +48,8 @@ export default class ProductDetails{
 
         const findProduct = this.productList.filter((item) => item.Id === this.productId)
         if(findProduct.length !== 0) {
-            findProduct[0].qty++
+            findProduct[0].qty++;
+            findProduct[0].FinalPrice *= findProduct[0].qty;
 
             // remove the product that you edited from the old product list
             this.productList = this.productList.filter((item) => item.Id !== this.productId)
