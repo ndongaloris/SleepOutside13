@@ -1,6 +1,8 @@
 import { setLocalStorage, getLocalStorage} from "./utils.mjs";
 
 function renderTemplate(product){
+    const discounted = product.FinalPrice < product.SuggestedRetailPrice ;
+    const discount = (product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice * 100 ;
     return `<section class="product-detail">
     <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
@@ -10,7 +12,7 @@ function renderTemplate(product){
         src=${product.Images.PrimaryMedium}
         alt=${product.Name}>
     </picture>
-
+    ${discounted && `<div class="discount"> ${Math.round(discount)}% off</div>`}
     <p class="product-card__price">${product.FinalPrice}</p>
     <p class="product__color">${product.Colors[0].ColorName}</p>
     <p class="product__description">${product.DescriptionHtmlSimple}</p>
