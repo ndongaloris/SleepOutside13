@@ -20,7 +20,7 @@ function cartItemTemplate(item) {
         <div class="cart-card__del-btn">
         <a href="#" id="removeFromCart" data-id="${item.Id}">&#9746;</a>
         </div>
-        <div class="itemQuantity">
+        <div class="itemQuantity" data-id="${item.Id}">
             <p id="minus">-</p>
             <input class="num" type="number" value=${item.qty} min=1 max="10"> 
             <p id="plus">+</p>
@@ -41,7 +41,7 @@ export default class shoppingCart{
         const htmlItems = cartItems.map((item) => cartItemTemplate(item));
         document.querySelector(this.productList).innerHTML = htmlItems.join("");
         removeItems(this.key);
-        cartItemQuantity();
+        cartItemQuantity(this.key);
     }
 }
 
@@ -69,45 +69,86 @@ function removeFromCart(key, prodId) {
     window.location.reload();
 }
 
-function cartItemQuantity(){
-    const cartItems =  getLocalStorage("so-cart");
-
+// Function to handle updating quantity of items in the cart
+function cartItemQuantity(key){
+    // Retrieve cart items from local storage
+    let cartItems = getLocalStorage(key);
+    
+    // Event listeners for "minus" buttons
     document.querySelectorAll("#minus").forEach(element => {        
-        element.addEventListener("click", (event) =>{
+        element.addEventListener("click", (event) => {
             // Navigate to the parent element of the clicked minus button
             let parentElement = event.target.parentElement;
 
-            const prodId = event.target.dataset.id;
+            // Retrieve product ID from the data attribute of the parent element
+            const prodId = parentElement.dataset.id;
 
-            const productIndex =  cartItems.findIndex(item => item.id === prodId)
-
-            let productQty = cartItems[productIndex].qty;
-            let productPrice = cartItems[productIndex].FinalPrice;
+            // Find the product in cartItems array based on ID
+            let foundProduct = cartItems.filter((item) => item.Id === prodId);
+            let productIndex = cartItems.findIndex(item => item.Id === prodId);
 
             // Find the input element within the same parent element
             let qtyInput = parentElement.querySelector(".num");
             if (qtyInput) {
-                // Decrement the value
+                // Decrement the quantity value
                 let qtyValue = parseInt(qtyInput.value);
                 qtyValue--; 
-                qtyInput.value = qtyValue;
-                productQty = qtyValue;
-                productPrice = productPrice * productQty;
+
+                // Update quantity and final price of the found product
+                foundProduct[0].qty = qtyValue;
+                foundProduct[0].FinalPrice = (foundProduct[0].ListPrice * qtyValue).toFixed(2);
             }
+
+            // Replace the product at the same index with the updated product
+            cartItems.splice(productIndex, 1, foundProduct[0]);
+
+            // Update local storage with the modified cart items
+            setLocalStorage("so-cart", cartItems);
+
+            // If quantity becomes 0, remove the product from the cart
+            if (foundProduct[0].qty === 0){
+                removeFromCart(key, prodId);
+            }
+
+            // Reload the page
+            window.location.reload();
         })
     })
+
+    // Event listeners for "plus" buttons
     document.querySelectorAll("#plus").forEach(element => {        
-        element.addEventListener("click", (event) =>{
-            // Navigate to the parent element of the clicked minus button
+        element.addEventListener("click", (event) => {
+            let pricehtml = document.querySelector(".cart-card__price");
+            // Navigate to the parent element of the clicked plus button
             let parentElement = event.target.parentElement;
+
+            // Retrieve product ID from the data attribute of the parent element
+            const prodId = parentElement.dataset.id;
+
+            // Find the product in cartItems array based on ID
+            let foundProduct = cartItems.filter((item) => item.Id === prodId);
+            let productIndex = cartItems.findIndex(item => item.Id === prodId);
+            
             // Find the input element within the same parent element
             let qtyInput = parentElement.querySelector(".num");
             if (qtyInput) {
-                // Decrement the value
+                // Increment the quantity value
                 let qtyValue = parseInt(qtyInput.value);
                 qtyValue++; 
-                qtyInput.value = qtyValue;
+
+                // Update quantity and final price of the found product
+                foundProduct[0].qty = qtyValue;
+                foundProduct[0].FinalPrice = (foundProduct[0].ListPrice * qtyValue).toFixed(2);
             }
+
+            // Replace the product at the same index with the updated product
+            cartItems.splice(productIndex, 1, foundProduct[0]);
+
+            // Update local storage with the modified cart items
+            setLocalStorage("so-cart", cartItems);
+
+            // Reload the page
+            window.location.reload();
         })
     })
 }
