@@ -70,10 +70,20 @@ function removeFromCart(key, prodId) {
 }
 
 function cartItemQuantity(){
+    const cartItems =  getLocalStorage("so-cart");
+
     document.querySelectorAll("#minus").forEach(element => {        
         element.addEventListener("click", (event) =>{
             // Navigate to the parent element of the clicked minus button
             let parentElement = event.target.parentElement;
+
+            const prodId = event.target.dataset.id;
+
+            const productIndex =  cartItems.findIndex(item => item.id === prodId)
+
+            let productQty = cartItems[productIndex].qty;
+            let productPrice = cartItems[productIndex].FinalPrice;
+
             // Find the input element within the same parent element
             let qtyInput = parentElement.querySelector(".num");
             if (qtyInput) {
@@ -81,6 +91,8 @@ function cartItemQuantity(){
                 let qtyValue = parseInt(qtyInput.value);
                 qtyValue--; 
                 qtyInput.value = qtyValue;
+                productQty = qtyValue;
+                productPrice = productPrice * productQty;
             }
         })
     })
