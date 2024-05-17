@@ -72,7 +72,7 @@ export default class checkoutProcess{
         // calculate and display the total amount of the items in the cart, and the number of items.
         this.list.forEach(item => {
             this.itemTotal += item.qty;
-            this.subTotal += Math.round(item.FinalPrice * item.qty, 2);
+            this.subTotal += item.ListPrice * item.qty;
         });
         this.calculateOrdertotal();
     }
@@ -90,10 +90,10 @@ export default class checkoutProcess{
     displayOrderTotals() {
         // once the totals are all calculated display them in the order summary page
         document.querySelector("#itemTotal").textContent = `(${this.itemTotal}) Items`;
-        document.querySelector("#subTotal").textContent = this.subTotal;
-        document.querySelector("#tax").textContent = this.tax;
+        document.querySelector("#subTotal").textContent = this.subTotal.toFixed(2);
+        document.querySelector("#tax").textContent = this.tax.toFixed(2);
         document.querySelector("#shipping").textContent = this.shipping;
-        document.querySelector("#orderTotal").textContent = this.orderTotal;
+        document.querySelector("#orderTotal").textContent = this.orderTotal.toFixed(2);
     }
     renderPaymentTemplate(){
         document.querySelector(this.selector)
