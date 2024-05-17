@@ -1,4 +1,5 @@
-import { setLocalStorage, getLocalStorage} from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, removeAllAlerts, alertMessage} from "./utils.mjs";
+import { superscriptNumber } from "./SuperScriptNumber.mjs";
 
 function renderTemplate(product){
     const discounted = product.FinalPrice < product.SuggestedRetailPrice ;
@@ -7,9 +8,10 @@ function renderTemplate(product){
     <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
     <picture>
-        <source srcset="${product.Images.PrimarySmall}" media="(max-width: 700px)">
+        <source srcset="${product.Images.PrimaryMedium}" media="(max-width: 400px)">
+        <source srcset="${product.Images.PrimaryLarge}" media="(max-width: 800px)">
         <img
-        src=${product.Images.PrimaryMedium}
+        src=${product.Images.PrimaryExtraLarge}
         alt=${product.Name}>
     </picture>
     ${discounted && `<div class="discount"> ${Math.round(discount)}% off</div>`}
@@ -39,8 +41,12 @@ export default class ProductDetails{
         // once the HTML is rendered we can add a listener to Add to Cart button
         // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
         // add listener to Add to Cart button
-        document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this));
-        document.getElementById("addToCart").addEventListener("click", () => {window.location.reload()});
+        document.getElementById("addToCart").addEventListener("click", () =>{
+            removeAllAlerts();
+            this.addToCart();
+            alertMessage(`${this.product.Name} has been added to Cart`);
+            superscriptNumber();
+        })
     }
     addToCart(){
         this.productList = getLocalStorage("so-cart");
@@ -48,7 +54,8 @@ export default class ProductDetails{
 
         const findProduct = this.productList.filter((item) => item.Id === this.productId)
         if(findProduct.length !== 0) {
-            findProduct[0].qty++
+            findProduct[0].qty++;
+            findProduct[0].FinalPrice *= findProduct[0].qty;
 
             // remove the product that you edited from the old product list
             this.productList = this.productList.filter((item) => item.Id !== this.productId)
