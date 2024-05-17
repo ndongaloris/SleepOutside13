@@ -4,9 +4,9 @@ function cartItemTemplate(item) {
     const newItem = `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
     <picture>
-        <source srcset="${item.Images.PrimarySmall}" media="(max-width: 700px)">
+        <source srcset="${item.Images.PrimaryMedium}" media="(max-width: 700px)">
         <img
-            src=${item.Images.PrimaryMedium}
+            src=${item.Images.PrimaryLarge}
             alt=${item.Name}>
     </picture>
         </a>
