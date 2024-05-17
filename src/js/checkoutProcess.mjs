@@ -1,5 +1,5 @@
 import ExternalServices from "./ExternalServices.mjs";
-import {getLocalStorage, setLocalStorage} from "./utils.mjs";
+import {getLocalStorage, setLocalStorage, removeAllAlerts, alertMessage} from "./utils.mjs";
 
 const services = new ExternalServices();
 
@@ -79,9 +79,9 @@ export default class checkoutProcess{
 
     calculateOrdertotal() {
         // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
-        this.shipping = Math.round((this.itemTotal - 1) * 2 + 10, 2);
-        this.tax = Math.round(this.subTotal * 0.06, 2);
-        this.orderTotal = Math.round(this.tax + this.subTotal + this.shipping, 2);
+        this.shipping = (this.itemTotal - 1) * 2 + 10, 2;
+        this.tax = this.subTotal * 0.06, 2;
+        this.orderTotal = this.tax + this.subTotal + this.shipping, 2;
 
         // display the totals.
         this.displayOrderTotals();
@@ -120,8 +120,11 @@ export default class checkoutProcess{
             setLocalStorage("so-cart", []);
             location.assign("/checkout/success.html");
         } catch (err) {
-            console.log(err);
+             // get rid of any preexisting alerts.
+            removeAllAlerts();
+            for (let message in err.message) {
+                alertMessage(err.message[message]);
+            }
         }
     }
 }
-
