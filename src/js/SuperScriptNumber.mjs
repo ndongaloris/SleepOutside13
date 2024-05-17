@@ -1,12 +1,19 @@
-import { getLocalStorage} from "./utils.mjs";
+// Importing getLocalStorage function from utils.mjs
+import { getLocalStorage } from "./utils.mjs";
 
-export async function superscriptNumber(){
+// Async function to update the superscript number displaying the number of items in the cart
+export function superscriptNumber(){
+    // Retrieve items from local storage
     let items = getLocalStorage("so-cart");
+    // If no items found, set items count to 0
     if (items === null){
         items = 0;
     } else{
-        items  = items.length;
+        // Count the number of items
+        items = items.length;
     }
-    const number = await document.querySelector(".superscript-number");
+    // Select the element displaying the superscript number
+    const number = document.querySelector(".superscript-number");
+    // Update the content of the element with the item count
     number.textContent = items;
 }

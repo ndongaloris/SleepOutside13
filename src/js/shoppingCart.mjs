@@ -4,9 +4,9 @@ function cartItemTemplate(item) {
     const newItem = `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
     <picture>
-        <source srcset="${item.Images.PrimarySmall}" media="(max-width: 700px)">
+        <source srcset="${item.Images.PrimaryMedium}" media="(max-width: 700px)">
         <img
-            src=${item.Images.PrimaryMedium}
+            src=${item.Images.PrimaryLarge}
             alt=${item.Name}>
     </picture>
         </a>
@@ -29,6 +29,9 @@ function cartItemTemplate(item) {
     
     return newItem;
 }
+function checkoutSummary(){
+    return ` <a href="../checkout/index.html">PROCEED TO CHECKOUT</a>`
+}
 
 export default class shoppingCart{
     constructor(key, productList){
@@ -41,6 +44,9 @@ export default class shoppingCart{
         const htmlItems = cartItems.map((item) => cartItemTemplate(item));
         document.querySelector(this.productList).innerHTML = htmlItems.join("");
         removeItems(this.key);
+        if (cartItems.length > 0){
+            document.querySelector("#product-summary").insertAdjacentHTML("afterbegin", checkoutSummary());
+        }
         cartItemQuantity(this.key);
     }
 }
@@ -118,7 +124,6 @@ function cartItemQuantity(key){
     // Event listeners for "plus" buttons
     document.querySelectorAll("#plus").forEach(element => {        
         element.addEventListener("click", (event) => {
-            let pricehtml = document.querySelector(".cart-card__price");
             // Navigate to the parent element of the clicked plus button
             let parentElement = event.target.parentElement;
 
