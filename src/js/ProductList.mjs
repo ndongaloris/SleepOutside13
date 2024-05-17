@@ -13,9 +13,10 @@ function productCardTemplate(product) {
                 <a href="../product_pages/index.html?product=${product.Id}">
                 ${discounted ? `<div class="discount"> ${Math.round(discount)}% off</div>` : ""}
                 <picture>
-                <source srcset="${product.Images.PrimarySmall}" media="(max-width: 700px)">
+                <source srcset="${product.Images.PrimaryMedium}" media="(max-width: 400px)">
+                <source srcset="${product.Images.PrimaryLarge}" media="(max-width: 800px)">
                     <img
-                    src="${product.Images.PrimaryMedium}"
+                    src="${product.Images.PrimaryExtraLarge}"
                     alt="${product.Name}">
                 </picture>
                 <h3 class="card__brand">${product.Brand.Name}</h3>

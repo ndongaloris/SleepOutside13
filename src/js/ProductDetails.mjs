@@ -8,9 +8,10 @@ function renderTemplate(product){
     <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
     <picture>
-        <source srcset="${product.Images.PrimarySmall}" media="(max-width: 700px)">
+        <source srcset="${product.Images.PrimaryMedium}" media="(max-width: 400px)">
+        <source srcset="${product.Images.PrimaryLarge}" media="(max-width: 800px)">
         <img
-        src=${product.Images.PrimaryMedium}
+        src=${product.Images.PrimaryExtraLarge}
         alt=${product.Name}>
     </picture>
     ${discounted && `<div class="discount"> ${Math.round(discount)}% off</div>`}
