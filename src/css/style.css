@@ -1,6 +1,6 @@
 :root {
   --font-body: Arial, Helvetica, sans-serif;
-  --font-headline: Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --font-headline: "Haettenschweiler", "Arial Narrow Bold", sans-serif;
   /* colors */
   --primary-color: #f0a868;
   --secondary-color: #525b0f;
@@ -296,7 +296,7 @@ button {
 }
 
 /* alert styles */
-.alertMessage {
+main .alertMessage {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -304,7 +304,7 @@ button {
   background-color: var(--primary-color);
   border: 1px solid darkorange;
 }
-.alertMessage > p {
+main .alertMessage > p {
   margin: 0;
 }
 

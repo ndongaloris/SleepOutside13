@@ -30,29 +30,7 @@ function cartItemTemplate(item) {
     return newItem;
 }
 function checkoutSummary(){
-    return `<table>
-                <tr>
-                    <th>Your Order</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td id="itemTotal"></td>
-                    <td id="subTotal"></td>
-                </tr>
-                <tr>
-                    <td>Shipping</td>
-                    <td id="shipping"></td>
-                </tr>
-                <tr>
-                    <td>Vat (Incl.)</td>
-                    <td id="tax"></td>
-                </tr>
-                <tr>
-                    <th>Total</th>
-                    <th id="orderTotal"></th>
-                </tr>
-            </table>
-        <a href="../checkout/index.html">PROCEED TO CHECKOUT</a>`
+    return ` <a href="../checkout/index.html">PROCEED TO CHECKOUT</a>`
 }
 
 export default class shoppingCart{
@@ -146,7 +124,6 @@ function cartItemQuantity(key){
     // Event listeners for "plus" buttons
     document.querySelectorAll("#plus").forEach(element => {        
         element.addEventListener("click", (event) => {
-            let pricehtml = document.querySelector(".cart-card__price");
             // Navigate to the parent element of the clicked plus button
             let parentElement = event.target.parentElement;
 

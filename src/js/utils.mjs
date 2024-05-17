@@ -85,22 +85,27 @@ export async function loadHeaderFooter(){
 
 
 export function alertMessage(message, scroll = true){
-  const alertElement = document.querySelector(".alertMessage")
+  const alertElement = document.createElement("section");
+  alertElement.classList.add("alertMessage");
   alertElement.innerHTML = `<p>${message}</p> <span>X</span>`
   // add a listener to the alert to see if they clicked on the X
   // if they did then remove the child
   alertElement.addEventListener("click", function(e) {
     if(e.target.tagName == "SPAN") { // how can we tell if they clicked on our X or on something else?  hint: check out e.target.tagName or e.target.innerText
-        main.removeChild(this);
-      }
+      main.removeChild(this);
+    }
   })
-  // add the alert to the top of main
+  // // add the alert to the top of main
   const main = document.querySelector("main");
   main.prepend(alertElement);
   // make sure they see the alert by scrolling to the top of the window
   //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
   if(scroll)
     window.scrollTo(0,0);
+  // left this here to show how you could remove the alert automatically after a certain amount of time.
+    setTimeout(function () {
+      main.removeChild(alertElement);
+    }, 1000);
 }
 export function removeAllAlerts() {
   const alerts = document.querySelectorAll(".alertMessage");

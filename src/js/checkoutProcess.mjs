@@ -120,11 +120,18 @@ export default class checkoutProcess{
             setLocalStorage("so-cart", []);
             location.assign("/checkout/success.html");
         } catch (err) {
-             // get rid of any preexisting alerts.
+            // get rid of any preexisting alerts.
             removeAllAlerts();
-            for (let message in err.message) {
-                alertMessage(err.message[message]);
-            }
+            
+            console.log(err);
+
+            // Access the result of the promise returned by err.message
+            err.message.then(result => {
+                // Use the result here
+                for(let element in result){
+                    alertMessage(result[element]);
+                }
+            })
         }
     }
 }
