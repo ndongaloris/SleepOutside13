@@ -45,4 +45,16 @@ export default class productList {
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
+
+  renderSearchList(list) {
+    // console.log('renderSearchList', list);
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
+
+  async serchProd (proName) {
+    // console.log(proName);
+    const res = await this.dataSource.searchProduct(proName, this.category);
+    this.listElement.innerHTML = "";
+    this.renderSearchList(res);
+  }
 }

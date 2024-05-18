@@ -3,6 +3,7 @@ import productList from "./ProductList.mjs"
 import ExternalServices from "./ExternalServices.mjs";
 loadHeaderFooter();
 
+
 const category = getParams("category");
 document.querySelector(".productHeader").textContent += `: ${category.charAt(0).toUpperCase()}${category.substring(1)}`;
 // first create an instance of our ProductData class.
@@ -14,4 +15,10 @@ const myList = new productList(category, dataSource, listElement);
 // finally call the init method to show our products
 
 myList.init();
+
+document.getElementById("searchBtn").addEventListener("click", function () {
+    let productSeachTerm = document.getElementById("productSeachTerm").value;
+    const myList = new productList(category, dataSource, listElement);
+    myList.serchProd(productSeachTerm);
+} );
 
