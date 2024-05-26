@@ -3,5 +3,6 @@ import shoppingCart from "./shoppingCart.mjs";
 
 loadHeaderFooter(); 
 
+
 const cart = new shoppingCart("so-cart", ".product-list");
 cart.renderCartContents();
