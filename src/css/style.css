@@ -261,6 +261,11 @@ button {
 }
 /* ------------- Newsletter ------------- */
 
+
+fieldset {
+  display:flex;
+  flex-direction: column; 
+}
 #Newsletter{
   background-color: var(--light-grey);
   font-family: var(--font-body);
